@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExecSkills Hub - Your Executive Function Companion</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Indie+Flower&family=Patrick+Hand&family=Inter:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-cream: #FFF8E7;
+            --primary-blue: #4A90E2;
+            --accent-coral: #FF6B6B;
+            --accent-mint: #4ECDC4;
+            --accent-yellow: #FFE66D;
+            --accent-purple: #A8DADC;
+            --text-dark: #2D3142;
+            --text-gray: #5A6374;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #FFF8E7 0%, #F0E6D2 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Textured background overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,.05) 10px, rgba(255,255,255,.05) 20px),
+                repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(0,0,0,.02) 10px, rgba(0,0,0,.02) 20px);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        /* Decorative elements */
+        .doodle-element {
+            position: absolute;
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 2;
+        }
+        
+        .tape {
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: absolute;
+            transform: rotate(-5deg);
+        }
+        
+        header {
+            position: relative;
+            z-index: 10;
+            background: white;
+            padding: 2rem 2rem 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-bottom: 3px solid var(--accent-coral);
+            margin-bottom: 2rem;
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        h1 {
+            font-family: 'Caveat', cursive;
+            font-size: 3.5rem;
+            color: var(--primary-blue);
+            text-shadow: 3px 3px 0px rgba(255,107,107,0.3);
+            margin-bottom: 0.5rem;
+            transform: rotate(-1deg);
+            display: inline-block;
+        }
+        
+        .subtitle {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-left: 1rem;
+        }
+        
+        nav {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            font-family: 'Patrick Hand', cursive;
+            background: white;
+            border: 3px solid var(--primary-blue);
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 4px 4px 0px rgba(74,144,226,0.3);
+            transform: rotate(-1deg);
+            position: relative;
+        }
+        
+        .nav-btn:hover {
+            transform: rotate(0deg) translateY(-2px);
+            box-shadow: 6px 6px 0px rgba(74,144,226,0.4);
+            background: var(--accent-yellow);
+        }
+        
+        .nav-btn.active {
+            background: var(--primary-blue);
+            color: white;
+            transform: rotate(1deg);
+        }
+        
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Card styles with scrapbook aesthetic */
+        .card {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 
+                4px 4px 0px rgba(0,0,0,0.1),
+                8px 8px 0px rgba(255,107,107,0.2);
+            border: 2px solid var(--text-dark);
+            position: relative;
+            transform: rotate(-0.5deg);
+        }
+        
+        .card:nth-child(even) {
+            transform: rotate(0.5deg);
+            box-shadow: 
+                -4px 4px 0px rgba(0,0,0,0.1),
+                -8px 8px 0px rgba(78,205,196,0.2);
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            right: 20%;
+            width: 60px;
+            height: 25px;
+            background: rgba(255,255,255,0.8);
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transform: rotate(-5deg);
+        }
+        
+        .card h2 {
+            font-family: 'Caveat', cursive;
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            border-bottom: 3px dashed var(--accent-coral);
+            padding-bottom: 0.5rem;
+        }
+        
+        .card h3 {
+            font-family: 'Indie Flower', cursive;
+            font-size: 1.8rem;
+            color: var(--accent-coral);
+            margin: 1.5rem 0 1rem;
+        }
+        
+        /* Assessment styles */
+        .assessment-container {
+            background: linear-gradient(135deg, #FFE66D 0%, #FFEB99 100%);
+            padding: 3rem;
+            border: 4px solid var(--text-dark);
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        .question-card {
+            background: white;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border: 2px solid var(--primary-blue);
+            box-shadow: 3px 3px 0px rgba(74,144,226,0.3);
+            transform: rotate(-0.3deg);
+        }
+        
+        .question-card:nth-child(even) {
+            transform: rotate(0.3deg);
+        }
+        
+        .question-text {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: var(--primary-cream);
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .option:hover {
+            border-color: var(--primary-blue);
+            background: white;
+            transform: translateX(5px);
+        }
+        
+        .option input[type="radio"] {
+            margin-right: 1rem;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .option.selected {
+            background: var(--accent-mint);
+            border-color: var(--primary-blue);
+            transform: translateX(5px);
+        }
+        
+        .btn {
+            font-family: 'Patrick Hand', cursive;
+            background: var(--accent-coral);
+            color: white;
+            border: 3px solid var(--text-dark);
+            padding: 1rem 2rem;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            margin: 1rem 0.5rem 1rem 0;
+            transform: rotate(-1deg);
+        }
+        
+        .btn:hover {
+            transform: rotate(0deg) translateY(-3px);
+            box-shadow: 7px 7px 0px rgba(0,0,0,0.4);
+        }
+        
+        .btn:active {
+            transform: rotate(0deg) translateY(0px);
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.3);
+        }
+        
+        .btn-secondary {
+            background: var(--accent-mint);
+        }
+        
+        /* Results display */
+        .results-container {
+            background: white;
+            padding: 3rem;
+            border: 5px solid var(--primary-blue);
+            box-shadow: 10px 10px 0px rgba(74,144,226,0.3);
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .character-reveal {
+            font-family: 'Caveat', cursive;
+            font-size: 4rem;
+            color: var(--accent-coral);
+            margin: 2rem 0;
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.1);
+        }
+        
+        .character-image {
+            font-size: 8rem;
+            margin: 2rem 0;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-mint) 100%);
+            padding: 1.5rem;
+            border: 3px solid var(--text-dark);
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
+            transform: rotate(-1deg);
+        }
+        
+        .stat-card:nth-child(even) {
+            transform: rotate(1deg);
+        }
+        
+        .stat-label {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-bar {
+            background: white;
+            height: 30px;
+            border: 2px solid var(--text-dark);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-fill {
+            height: 100%;
+            background: var(--accent-coral);
+            transition: width 1s ease-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+        
+        /* Resource grid */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .resource-card {
+            background: white;
+            border: 3px solid var(--primary-blue);
+            padding: 2rem;
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .resource-card::after {
+            content: '📌';
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            font-size: 2rem;
+            transform: rotate(20deg);
+        }
+        
+        .resource-card:hover {
+            transform: rotate(-1deg) translateY(-5px);
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.2);
+        }
+        
+        .resource-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .resource-title {
+            font-family: 'Caveat', cursive;
+            font-size: 2rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+        
+        /* Strategy cards */
+        .strategy-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .strategy-item {
+            background: var(--primary-cream);
+            border-left: 5px solid var(--accent-coral);
+            padding: 1.5rem;
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.1);
+            transform: rotate(0.2deg);
+        }
+        
+        .strategy-item:nth-child(even) {
+            border-left-color: var(--accent-mint);
+            transform: rotate(-0.2deg);
+        }
+        
+        .strategy-title {
+            font-family: 'Indie Flower', cursive;
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Progress tracking */
+        .progress-container {
+            background: linear-gradient(135deg, #A8DADC 0%, #4ECDC4 100%);
+            padding: 2rem;
+            border: 4px solid var(--text-dark);
+            margin: 2rem 0;
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.2);
+        }
+        
+        .progress-bar {
+            background: white;
+            height: 40px;
+            border: 3px solid var(--text-dark);
+            margin: 1rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--accent-coral);
+            transition: width 0.5s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: white;
+        }
+        
+        /* Chatbot assistant */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .chatbot-toggle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--accent-coral);
+            border: 4px solid var(--text-dark);
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            transition: all 0.3s;
+        }
+        
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 7px 7px 0px rgba(0,0,0,0.4);
+        }
+        
+        .chatbot-window {
+            display: none;
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            width: 350px;
+            max-height: 500px;
+            background: white;
+            border: 4px solid var(--text-dark);
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.3);
+            flex-direction: column;
+        }
+        
+        .chatbot-window.active {
+            display: flex;
+        }
+        
+        .chatbot-header {
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem;
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.3rem;
+            border-bottom: 3px solid var(--text-dark);
+        }
+        
+        .chatbot-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            max-height: 350px;
+        }
+        
+        .message {
+            margin: 1rem 0;
+            padding: 0.8rem;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+        
+        .message.bot {
+            background: var(--accent-purple);
+            align-self: flex-start;
+        }
+        
+        .message.user {
+            background: var(--accent-mint);
+            align-self: flex-end;
+            margin-left: auto;
+        }
+        
+        .chatbot-input {
+            display: flex;
+            border-top: 3px solid var(--text-dark);
+        }
+        
+        .chatbot-input input {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .chatbot-input button {
+            background: var(--accent-coral);
+            border: none;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .resource-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .chatbot-window {
+                width: calc(100% - 40px);
+                right: 20px;
+            }
+        }
+        
+        /* Print styles */
+        @media print {
+            .chatbot-container,
+            nav,
+            .btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorative doodle elements -->
+    <div class="doodle-element tape" style="top: 50px; right: 100px; width: 80px; height: 30px;"></div>
+    <div class="doodle-element tape" style="top: 200px; left: 50px; width: 60px; height: 25px;"></div>
+    
+    <header>
+        <div class="header-content">
+            <h1>✨ ExecSkills Hub ✨</h1>
+            <p class="subtitle">Your Personal Executive Function Companion</p>
+            <nav>
+                <button class="nav-btn active" onclick="showSection('home')">🏠 Home</button>
+                <button class="nav-btn" onclick="showSection('assessment')">🎯 Self-Assessment</button>
+                <button class="nav-btn" onclick="showSection('strategies')">📚 Study Strategies</button>
+                <button class="nav-btn" onclick="showSection('tools')">🛠️ Tools & Resources</button>
+                <button class="nav-btn" onclick="showSection('goals')">🎯 Goal Setting</button>
+                <button class="nav-btn" onclick="showSection('progress')">📈 Track Progress</button>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <!-- Home Section -->
+        <div id="home" class="content-section active">
+            <div class="card">
+                <h2>Welcome to Your Executive Function Journey! 🚀</h2>
+                <p style="font-size: 1.1rem; line-height: 1.8; margin: 1rem 0;">
+                    Hey there! Executive functions are like your brain's control center – they help you plan, organize, 
+                    manage time, and stay focused. Think of them as your mental superpowers! This hub is designed to 
+                    help you discover your unique executive functioning style and build skills that work for YOU.
+                </p>
+                
+                <h3>What You'll Find Here:</h3>
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon">🎮</div>
+                        <div class="resource-title">Fun Self-Assessment</div>
+                        <p>Discover your executive function character! Are you a strategic Pikachu, a focused Charmander, 
+                        or a creative Squirtle? Take our quiz to find out!</p>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-icon">📖</div>
+                        <div class="resource-title">Study Strategies</div>
+                        <p>Learn proven techniques for note-taking, memorization, test-taking, and more. 
+                        Find what works best for your brain!</p>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-icon">⏰</div>
+                        <div class="resource-title">Time Management</div>
+                        <p>Master the art of time awareness and planning. Say goodbye to last-minute cramming!</p>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-icon">🎯</div>
+                        <div class="resource-title">Goal Setting Tools</div>
+                        <p>Set SMART goals and track your progress. Watch yourself level up!</p>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-icon">🧠</div>
+                        <div class="resource-title">Memory Techniques</div>
+                        <p>Unlock powerful memory strategies like categorization, storytelling, and mnemonics.</p>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-icon">💪</div>
+                        <div class="resource-title">Decision Making</div>
+                        <p>Build confidence in making choices and solving problems step-by-step.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Quick Start Guide 🌟</h2>
+                <div class="strategy-list">
+                    <div class="strategy-item">
+                        <div class="strategy-title">1. Take the Assessment</div>
+                        <p>Start by discovering your executive function profile. It's fun, quick, and you'll get a personalized character result!</p>
+                    </div>
+                    <div class="strategy-item">
+                        <div class="strategy-title">2. Explore Strategies</div>
+                        <p>Browse through strategies tailored to different challenges – from organization to test-taking.</p>
+                    </div>
+                    <div class="strategy-item">
+                        <div class="strategy-title">3. Set Your Goals</div>
+                        <p>Use our goal-setting tools to create actionable plans for improvement.</p>
+                    </div>
+                    <div class="strategy-item">
+                        <div class="strategy-title">4. Track Progress</div>
+                        <p>Monitor your growth and celebrate your wins along the way!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Assessment Section -->
+        <div id="assessment" class="content-section">
+            <div class="assessment-container">
+                <h2 style="font-family: 'Caveat', cursive; font-size: 3rem; text-align: center; margin-bottom: 2rem;">
+                    Discover Your Executive Function Character! 🎮
+                </h2>
+                
+                <div id="assessment-questions"></div>
+                
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button class="btn" id="prev-btn" onclick="previousQuestion()" style="display: none;">⬅️ Previous</button>
+                    <button class="btn" id="next-btn" onclick="nextQuestion()">Next ➡️</button>
+                    <button class="btn" id="submit-btn" onclick="submitAssessment()" style="display: none;">🎉 Get My Results!</button>
+                </div>
+                
+                <div class="progress-container" style="margin-top: 2rem;">
+                    <div style="font-family: 'Patrick Hand', cursive; font-size: 1.2rem; margin-bottom: 0.5rem;">
+                        Your Progress
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="assessment-progress" style="width: 0%;">0%</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="results-section" style="display: none;">
+                <div class="results-container">
+                    <div class="character-reveal" id="character-name"></div>
+                    <div class="character-image" id="character-emoji"></div>
+                    <p id="character-description" style="font-size: 1.2rem; line-height: 1.8; margin: 2rem 0;"></p>
+                    
+                    <h3 style="font-family: 'Caveat', cursive; font-size: 2.5rem; margin: 2rem 0;">Your Stats</h3>
+                    <div class="stats-grid" id="stats-container"></div>
+                    
+                    <h3 style="font-family: 'Caveat', cursive; font-size: 2.5rem; margin: 2rem 0;">Your Strengths ✨</h3>
+                    <div id="strengths-list"></div>
+                    
+                    <h3 style="font-family: 'Caveat', cursive; font-size: 2.5rem; margin: 2rem 0;">Growth Areas 🌱</h3>
+                    <div id="growth-list"></div>
+                    
+                    <h3 style="font-family: 'Caveat', cursive; font-size: 2.5rem; margin: 2rem 0;">Recommended Strategies</h3>
+                    <div id="recommendations-list"></div>
+                    
+                    <button class="btn" onclick="retakeAssessment()">🔄 Retake Assessment</button>
+                    <button class="btn btn-secondary" onclick="showSection('strategies')">📚 Explore Strategies</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Strategies Section -->
+        <div id="strategies" class="content-section">
+            <div class="card">
+                <h2>Study Strategies Toolkit 📚</h2>
+                
+                <h3>Memory Strategies</h3>
+                <div class="strategy-list">
+                    <div class="strategy-item">
+                        <div class="strategy-title">🗂️ Categorization</div>
+                        <p><strong>What:</strong> Group related items together by category.</p>
+                        <p><strong>When to use:</strong> Memorizing vocabulary, historical facts, or any list of terms.</p>
+                        <p><strong>Example:</strong> Grouping U.S. Presidents by their political party or time period.</p>
+                    </div>
+                    
+                    <div class="strategy-item">
+                        <div class="strategy-title">📖 Narrative/Story Method</div>
+                        <p><strong>What:</strong> Create a story (even a bizarre one!) that links items together.</p>
+                        <p><strong>When to use:</strong> Retaining information in sequence or making connections.</p>
+                        <p><strong>Example:</strong> To remember Presidents, imagine George Washington living on Madison Street 
+                        right at the corner of Jefferson Park where his dog plays with other canine friends (Monroe Street).</p>
+                    </div>
+                    
+                    <div class="strategy-item">
+                        <div class="strategy-title">❤️ Emotion Connection</div>
+                        <p><strong>What:</strong> Connect information to personal feelings or experiences.</p>
+                        <p><strong>When to use:</strong> Making content memorable and meaningful.</p>
+                        <p><strong>Example:</strong> Connect a water cycle lesson to a time you experienced flooding or drought.</p>
+                    </div>
+                    
+                    <div class="strategy-item">
+                        <div class="strategy-title">🎵 Rhyme & Rhythm</div>
+                        <p><strong>What:</strong> Use music, rhythm, or rhymes to help remember information.</p>
+                        <p><strong>When to use:</strong> Memorizing formulas, spelling, or sequences.</p>
+                        <p><strong>Example:</strong> "In 1492, Columbus sailed the ocean blue"</p>
+                    </div>
+                    
+                    <div class="strategy-item">
+                        <div class="strategy-title">🔗 Personal Connection</div>
+                        <p><strong>What:</strong> Ask yourself "How do I connect to this?"</p>
+                        <p><strong>When to use:</strong> Making new material stick by relating it to what you already know.</p>
+                        <p><strong>Example:</strong> When learning about Hamlet, think about how you would react in that situation.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Note-Taking Strategies ✍️</h2>
+                
+                <div class="strategy-list">
+                    <div class="strategy-item">
+                        <div class="strategy-title">📝 Listen First, Then Write</div>
+                        <p>During lectures, listen for key concepts BEFORE writing. Use bullet points and abbreviations. 
+                        Go back afterward and fill in details while it's fresh in your mind.</p>
+                        <p><strong>Steps:</strong></p>
+                        <ol style="margin-left: 2rem; line-height: 1.8;">
+                            <li>Listen for key concepts before writing</li>
+                            <li>Record details first, going back and filling in main ideas later</li>
+                            <li>Use bullet points and abbreviations</li>
+                            <li>Ask clarifying questions</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="strategy-item">
+                        <div class="strategy-title">📋 Three-Column Method</div>
+                        <p>Prepare your paper with three columns: Main Ideas | Supporting Details | Personal Connections</p>
+                        <p>This helps you organize information AND make it meaningful to you.</p>
+                    </div>
+                    
+                    <div class="strategy-item">
+                        <div class="strategy-title">🎨 Multipurpose Notes</div>
+                        <p><strong>Active reading helps you:</strong></p>
+                        <ul style="margin-left: 2rem; line-height: 1.8;">
+                            <li>Identify, highlight, and track important information for tests</li>
+                            <li>Develop a "big picture" understanding of the material</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Test-Taking Tips 📝</h2>
+                
+                <div class="strategy-list">
+                    <div class="strategy-item">
+                        <div class="strategy-title">📖 Before the Test</div>
+                        <ul style="margin-left: 2rem; line-height: 1.8;">
+                            <li>Follow teacher instructions carefully</li>
+                            <li>Read directions and underline key words</li>
+                            <li>Ask for clarification if needed</li>
+                            <li>Look over the entire test before starting</li>
+                            <li>Answer easy questions first</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="strategy-item">
+                        <div class="strategy-title">📚 For Reading Passages</div>
+                        <p><strong>Read the questions FIRST!</strong> This tells you what to look for.</p>
+                        <p>Then look for context clues in the passage.</p>
+                    </div>
+                    
+                    <div class="strategy-item">
+                        <div class="strategy-title">✍️ For Writing Tasks</div>
+                        <ol style="margin-left: 2rem; line-height: 1.8;">
+                            <li><strong>READ</strong> the prompt carefully</li>
+                            <li><strong>THINK</strong> about what you know</li>
+                            <li><strong>ORGANIZE</strong> your thoughts</li>
+                            <li><strong>WRITE</strong> your response</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="strategy-item">
+                        <div class="strategy-title">🔢 For Math Problems</div>
+                        <ul style="margin-left: 2rem; line-height: 1.8;">
+                            <li>Read problems carefully</li>
+                            <li>Underline key information</li>
+                            <li>Number the steps</li>
+                            <li>Solve problem(s)</li>
+                            <li>Check your work</li>
+                            <li>Explain: How did I reach my answer? Why did I take those steps?</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="strategy-item">
+                        <div class="strategy-title">✅ True/False Questions</div>
+                        <ul style="margin-left: 2rem; line-height: 1.8;">
+                            <li>Write T and F clearly</li>
+                            <li>Read the entire statement carefully</li>
+                            <li>Know that all parts must be true for the statement to be true</li>
+                            <li>If there are exceptions, it is false</li>
+                            <li>Look for cue words in FALSE: never, best, only, always, worst, first, not exactly, totally, none, all, because, every, invariably</li>
+                            <li>Look for cue words in TRUE: generally, equally, frequently, less, seldom, mainly, often, usually, sometimes, probably, might, good</li>
+                            <li>Watch for double negatives</li>
+                            <li>If you don't know, guess (50% chance!)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>The Night Before & Morning Of 🌙☀️</h2>
+                
+                <div class="strategy-list">
+                    <div class="strategy-item">
+                        <div class="strategy-title">🛏️ The Night Before</div>
+                        <ol style="margin-left: 2rem; line-height: 1.8;">
+                            <li>Get plenty of sleep (go to bed early!)</li>
+                            <li>Eat a healthy breakfast</li>
+                            <li>Remind yourself: "This is only a test"</li>
+                            <li>Think about doing your best</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tools & Resources Section -->
+        <div id="tools" class="content-section">
+            <div class="card">
+                <h2>Tools & Resources 🛠️</h2>
+                
+                <h3>Organization Tools</h3>
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon">📱</div>
+                        <div class="resource-title">Digital Planners</div>
+                        <ul style="line-height: 1.8;">
+                            <li>Google Calendar - Color-code your classes!</li>
+                            <li>Notion - All-in-one workspace</li>
+                            <li>Todoist - Simple task management</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-icon">📓</div>
+                        <div class="resource-title">Physical Organizers</div>
+                        <ul style="line-height: 1.8;">
+                            <li>Bullet journal system</li>
+                            <li>Color-coded folders</li>
+                            <li>Weekly planning sheets</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-icon">⏱️</div>
+                        <div class="resource-title">Time Management</div>
+                        <ul style="line-height: 1.8;">
+                            <li>Pomodoro Timer (25 min focus, 5 min break)</li>
+                            <li>Visual timers</li>
+                            <li>Time blocking templates</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-icon">🎯</div>
+                        <div class="resource-title">Focus Tools</div>
+                        <ul style="line-height: 1.8;">
+                            <li>White noise/focus music</li>
+                            <li>Website blockers</li>
+                            <li>Study space setup guide</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Printable Resources 📄</h2>
+                <div class="strategy-list">
+                    <div class="strategy-item">
+                        <div class="strategy-title">📋 Weekly Planner</div>
+                        <p>Visual weekly schedule with time blocks for classes, homework, and activities.</p>
+                        <button class="btn btn-secondary">Download Template</button>
+                    </div>
+                    
+                    <div class="strategy-item">
+                        <div class="strategy-title">✅ Assignment Tracker</div>
+                        <p>Keep track of all your assignments, due dates, and completion status.</p>
+                        <button class="btn btn-secondary">Download Template</button>
+                    </div>
+                    
+                    <div class="strategy-item">
+                        <div class="strategy-title">🎯 SMART Goals Worksheet</div>
+                        <p>Template for setting Specific, Measurable, Achievable, Relevant, and Timely goals.</p>
+                        <button class="btn btn-secondary">Download Template</button>
+                    </div>
+                    
+                    <div class="strategy-item">
+                        <div class="strategy-title">📝 Study Session Planner</div>
+                        <p>Plan your study sessions with time blocks, breaks, and specific tasks.</p>
+                        <button class="btn btn-secondary">Download Template</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Goals Section -->
+        <div id="goals" class="content-section">
+            <div class="card">
+                <h2>SMART Goal Setting 🎯</h2>
+                
+                <div style="background: var(--accent-yellow); padding: 2rem; border: 3px solid var(--text-dark); margin: 2rem 0;">
+                    <h3 style="font-family: 'Caveat', cursive; font-size: 2rem;">What makes a goal SMART?</h3>
+                    <div class="strategy-list">
+                        <div class="strategy-item">
+                            <div class="strategy-title">S - Specific</div>
+                            <p>Clearly define what you want to achieve. Instead of "do better in math," try "improve my algebra test scores."</p>
+                        </div>
+                        <div class="strategy-item">
+                            <div class="strategy-title">M - Measurable</div>
+                            <p>How will you know when you've achieved it? "Raise my algebra grade from C to B."</p>
+                        </div>
+                        <div class="strategy-item">
+                            <div class="strategy-title">A - Achievable</div>
+                            <p>Is this realistic given your current situation and resources?</p>
+                        </div>
+                        <div class="strategy-item">
+                            <div class="strategy-title">R - Relevant</div>
+                            <p>Does this goal matter to you? Will it help you reach your bigger aspirations?</p>
+                        </div>
+                        <div class="strategy-item">
+                            <div class="strategy-title">T - Time-bound</div>
+                            <p>Set a deadline! "By the end of this semester."</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Create Your Goal</h3>
+                <div style="background: white; padding: 2rem; border: 3px solid var(--primary-blue); margin: 2rem 0;">
+                    <div style="margin: 1rem 0;">
+                        <label style="font-family: 'Patrick Hand', cursive; font-size: 1.2rem; display: block; margin-bottom: 0.5rem;">
+                            🎯 My Goal:
+                        </label>
+                        <input type="text" id="goal-input" style="width: 100%; padding: 1rem; border: 2px solid var(--text-dark); font-size: 1.1rem;" 
+                               placeholder="I want to...">
+                    </div>
+                    
+                    <div style="margin: 1rem 0;">
+                        <label style="font-family: 'Patrick Hand', cursive; font-size: 1.2rem; display: block; margin-bottom: 0.5rem;">
+                            📏 How will I measure success?
+                        </label>
+                        <input type="text" id="measure-input" style="width: 100%; padding: 1rem; border: 2px solid var(--text-dark); font-size: 1.1rem;" 
+                               placeholder="I'll know I've achieved this when...">
+                    </div>
+                    
+                    <div style="margin: 1rem 0;">
+                        <label style="font-family: 'Patrick Hand', cursive; font-size: 1.2rem; display: block; margin-bottom: 0.5rem;">
+                            📅 Deadline:
+                        </label>
+                        <input type="date" id="deadline-input" style="width: 100%; padding: 1rem; border: 2px solid var(--text-dark); font-size: 1.1rem;">
+                    </div>
+                    
+                    <div style="margin: 1rem 0;">
+                        <label style="font-family: 'Patrick Hand', cursive; font-size: 1.2rem; display: block; margin-bottom: 0.5rem;">
+                            🪜 Steps to achieve this goal:
+                        </label>
+                        <textarea id="steps-input" rows="5" style="width: 100%; padding: 1rem; border: 2px solid var(--text-dark); font-size: 1.1rem;" 
+                                  placeholder="1. &#10;2. &#10;3. "></textarea>
+                    </div>
+                    
+                    <button class="btn" onclick="saveGoal()">💾 Save My Goal</button>
+                </div>
+                
+                <div id="saved-goals">
+                    <h3>My Goals 📋</h3>
+                    <div id="goals-list" style="margin-top: 1rem;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Progress Section -->
+        <div id="progress" class="content-section">
+            <div class="card">
+                <h2>Track Your Progress 📈</h2>
+                
+                <div class="progress-container">
+                    <h3 style="font-family: 'Caveat', cursive; font-size: 2rem; color: white; margin-bottom: 1rem;">
+                        Materials Management Level
+                    </h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="materials-progress" style="width: 0%;">Not Yet Established</div>
+                    </div>
+                    <div style="margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <button class="btn btn-secondary" onclick="updateProgress('materials', 0)">Not Yet</button>
+                        <button class="btn btn-secondary" onclick="updateProgress('materials', 33)">Emerging</button>
+                        <button class="btn btn-secondary" onclick="updateProgress('materials', 66)">Developing</button>
+                        <button class="btn btn-secondary" onclick="updateProgress('materials', 100)">Mastery</button>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <h3 style="font-family: 'Caveat', cursive; font-size: 2rem; color: white; margin-bottom: 1rem;">
+                        Time Management Level
+                    </h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="time-progress" style="width: 0%;">Not Yet Established</div>
+                    </div>
+                    <div style="margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <button class="btn btn-secondary" onclick="updateProgress('time', 0)">Not Yet</button>
+                        <button class="btn btn-secondary" onclick="updateProgress('time', 33)">Emerging</button>
+                        <button class="btn btn-secondary" onclick="updateProgress('time', 66)">Developing</button>
+                        <button class="btn btn-secondary" onclick="updateProgress('time', 100)">Mastery</button>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <h3 style="font-family: 'Caveat', cursive; font-size: 2rem; color: white; margin-bottom: 1rem;">
+                        Study Strategies Level
+                    </h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="study-progress" style="width: 0%;">Not Yet Established</div>
+                    </div>
+                    <div style="margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <button class="btn btn-secondary" onclick="updateProgress('study', 0)">Not Yet</button>
+                        <button class="btn btn-secondary" onclick="updateProgress('study', 33)">Emerging</button>
+                        <button class="btn btn-secondary" onclick="updateProgress('study', 66)">Developing</button>
+                        <button class="btn btn-secondary" onclick="updateProgress('study', 100)">Mastery</button>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <h3 style="font-family: 'Caveat', cursive; font-size: 2rem; color: white; margin-bottom: 1rem;">
+                        Goal Setting Level
+                    </h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="goals-progress" style="width: 0%;">Not Yet Established</div>
+                    </div>
+                    <div style="margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <button class="btn btn-secondary" onclick="updateProgress('goals', 0)">Not Yet</button>
+                        <button class="btn btn-secondary" onclick="updateProgress('goals', 33)">Emerging</button>
+                        <button class="btn btn-secondary" onclick="updateProgress('goals', 66)">Developing</button>
+                        <button class="btn btn-secondary" onclick="updateProgress('goals', 100)">Mastery</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Reflection Journal 📔</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+                    Take a moment to reflect on your progress. What's working? What challenges are you facing?
+                </p>
+                
+                <textarea id="reflection-input" rows="8" 
+                          style="width: 100%; padding: 1rem; border: 3px solid var(--primary-blue); font-size: 1.1rem; font-family: 'Patrick Hand', cursive;"
+                          placeholder="Today I noticed... I'm proud of... I want to work on..."></textarea>
+                
+                <button class="btn" onclick="saveReflection()">💾 Save Reflection</button>
+                
+                <div id="reflections-list" style="margin-top: 2rem;"></div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Chatbot Assistant -->
+    <div class="chatbot-container">
+        <div class="chatbot-toggle" onclick="toggleChatbot()">🤖</div>
+        <div class="chatbot-window" id="chatbot-window">
+            <div class="chatbot-header">
+                ExecSkills Assistant 💬
+            </div>
+            <div class="chatbot-messages" id="chatbot-messages">
+                <div class="message bot">
+                    Hi! I'm your ExecSkills assistant! Ask me anything about executive functions, study strategies, 
+                    or how to use this hub. For example, you could ask:
+                    <ul style="margin-top: 0.5rem;">
+                        <li>"How do I improve my time management?"</li>
+                        <li>"What's the best way to take notes?"</li>
+                        <li>"Help me with test anxiety"</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbot-input" placeholder="Ask me anything..." onkeypress="handleChatEnter(event)">
+                <button onclick="sendChatMessage()">📤</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Assessment Questions
+        const assessmentQuestions = [
+            {
+                question: "How well do you keep track of your school materials (folders, notebooks, assignments)?",
+                category: "organization",
+                options: [
+                    { text: "I often lose things or can't find what I need", value: 1 },
+                    { text: "I sometimes misplace things but usually find them", value: 2 },
+                    { text: "I'm pretty organized most of the time", value: 3 },
+                    { text: "I always know exactly where everything is", value: 4 }
+                ]
+            },
+            {
+                question: "When you have a big project due, how do you approach it?",
+                category: "planning",
+                options: [
+                    { text: "I usually start the night before it's due", value: 1 },
+                    { text: "I start a few days before but feel rushed", value: 2 },
+                    { text: "I break it into smaller tasks over several days", value: 3 },
+                    { text: "I plan it out weeks in advance with a detailed schedule", value: 4 }
+                ]
+            },
+            {
+                question: "How aware are you of how much time things take?",
+                category: "time_awareness",
+                options: [
+                    { text: "I'm often surprised by how much time has passed", value: 1 },
+                    { text: "I sometimes underestimate how long things take", value: 2 },
+                    { text: "I'm usually pretty accurate about time", value: 3 },
+                    { text: "I have a great sense of time and rarely run late", value: 4 }
+                ]
+            },
+            {
+                question: "How do you handle distractions when studying?",
+                category: "focus",
+                options: [
+                    { text: "I get distracted constantly and struggle to refocus", value: 1 },
+                    { text: "I get distracted but can usually get back on track", value: 2 },
+                    { text: "I can focus for decent periods with occasional breaks", value: 3 },
+                    { text: "I can focus intensely for long periods", value: 4 }
+                ]
+            },
+            {
+                question: "When you need to remember information for a test, what do you do?",
+                category: "memory",
+                options: [
+                    { text: "I just read over it and hope I remember", value: 1 },
+                    { text: "I read it multiple times", value: 2 },
+                    { text: "I use flashcards or write things out", value: 3 },
+                    { text: "I use multiple strategies like stories, acronyms, and practice", value: 4 }
+                ]
+            },
+            {
+                question: "How do you prioritize your homework and tasks?",
+                category: "prioritization",
+                options: [
+                    { text: "I do whatever is in front of me first", value: 1 },
+                    { text: "I try to do the easiest things first", value: 2 },
+                    { text: "I consider what's due soonest", value: 3 },
+                    { text: "I strategically plan based on difficulty, time, and deadlines", value: 4 }
+                ]
+            },
+            {
+                question: "How do you handle making decisions (like choosing classes or activities)?",
+                category: "decision_making",
+                options: [
+                    { text: "I struggle to decide and often feel overwhelmed", value: 1 },
+                    { text: "I can decide but second-guess myself a lot", value: 2 },
+                    { text: "I think through options and make decent choices", value: 3 },
+                    { text: "I systematically evaluate options and feel confident", value: 4 }
+                ]
+            },
+            {
+                question: "How organized is your backpack/desk/study space?",
+                category: "organization",
+                options: [
+                    { text: "Very messy - papers everywhere, can't find things", value: 1 },
+                    { text: "Somewhat messy but I know generally where things are", value: 2 },
+                    { text: "Pretty organized with occasional clutter", value: 3 },
+                    { text: "Very organized - everything has its place", value: 4 }
+                ]
+            },
+            {
+                question: "How do you track assignments and due dates?",
+                category: "planning",
+                options: [
+                    { text: "I try to remember them but often forget", value: 1 },
+                    { text: "I write some things down but miss others", value: 2 },
+                    { text: "I use a planner or app regularly", value: 3 },
+                    { text: "I have a detailed system and check it daily", value: 4 }
+                ]
+            },
+            {
+                question: "When learning new material, how do you make it stick?",
+                category: "memory",
+                options: [
+                    { text: "I struggle to remember things after class", value: 1 },
+                    { text: "I try to review but don't have a system", value: 2 },
+                    { text: "I connect new info to things I already know", value: 3 },
+                    { text: "I use multiple memory strategies and review regularly", value: 4 }
+                ]
+            },
+            {
+                question: "How good are you at estimating how long homework will take?",
+                category: "time_awareness",
+                options: [
+                    { text: "I'm usually way off in my estimates", value: 1 },
+                    { text: "I underestimate more often than not", value: 2 },
+                    { text: "I'm fairly accurate most of the time", value: 3 },
+                    { text: "I accurately predict time needed and plan accordingly", value: 4 }
+                ]
+            },
+            {
+                question: "When you set goals, what happens?",
+                category: "goal_setting",
+                options: [
+                    { text: "I rarely set goals or achieve them", value: 1 },
+                    { text: "I set goals but don't follow through", value: 2 },
+                    { text: "I set and achieve some goals", value: 3 },
+                    { text: "I set SMART goals and regularly achieve them", value: 4 }
+                ]
+            }
+        ];
+        
+        // Character profiles
+        const characterProfiles = [
+            {
+                name: "Nebula Novice",
+                emoji: "🌟",
+                phase: "Emerging Star",
+                description: "You're like a young star just beginning to form! You have so much potential energy, and you're at the exciting beginning of your journey. Stars need time to gather their materials and find their structure - and so do you! This is a great time to start building foundational habits.",
+                scoreRange: [12, 24],
+                strengths: ["Creative thinking", "Enthusiasm", "Openness to learning"],
+                growth: ["Building consistent routines", "Developing organizational systems", "Time awareness"],
+                recommendations: [
+                    "Start with ONE organizational system (like a simple planner)",
+                    "Use visual timers to build time awareness",
+                    "Try the 'Where Are You?' backpack/desk organization exercise"
+                ]
+            },
+            {
+                name: "Comet Climber",
+                emoji: "☄️",
+                phase: "Gaining Momentum",
+                description: "You're like a comet picking up speed! You have the basics down and you're building momentum. Sometimes you might feel scattered (comets have debris trails!), but you're definitely moving forward. Focus on consistency to keep accelerating!",
+                scoreRange: [25, 36],
+                strengths: ["Building habits", "Self-awareness", "Willingness to try new strategies"],
+                growth: ["Consistency in routines", "Advanced planning", "Memory techniques"],
+                recommendations: [
+                    "Practice time-blocking for homework",
+                    "Try memory strategies like categorization and storytelling",
+                    "Set weekly goals and track your progress"
+                ]
+            },
+            {
+                name: "Planet Pioneer",
+                emoji: "🪐",
+                phase: "Establishing Orbit",
+                description: "You're like a planet with a steady orbit! You've established solid routines and systems that work for you. You have your own rhythm and can handle most challenges that come your way. Like a planet with rings, you're building beautiful, complex systems around you.",
+                scoreRange: [37, 44],
+                strengths: ["Strong organizational skills", "Good time management", "Effective study strategies"],
+                growth: ["Fine-tuning systems", "Advanced goal-setting", "Adapting to new challenges"],
+                recommendations: [
+                    "Explore advanced memory techniques",
+                    "Set long-term SMART goals",
+                    "Help others learn your strategies (teaching reinforces learning!)"
+                ]
+            },
+            {
+                name: "Galaxy Guardian",
+                emoji: "🌌",
+                phase: "Master Navigator",
+                description: "You're like a whole galaxy - complex, beautiful, and masterful! You've developed strong executive function skills and can navigate challenges with confidence. Like a galaxy that creates new stars, you have the skills to continuously grow and even help others develop their abilities.",
+                scoreRange: [45, 48],
+                strengths: ["Executive function mastery", "Strategic thinking", "Self-regulation"],
+                growth: ["Maintaining excellence", "Leadership", "Innovation"],
+                recommendations: [
+                    "Consider mentoring peers",
+                    "Challenge yourself with advanced projects",
+                    "Explore new creative applications of your skills"
+                ]
+            }
+        ];
+        
+        let currentQuestion = 0;
+        let answers = {};
+        
+        // Navigation
+        function showSection(sectionId) {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Assessment Logic
+        function initializeAssessment() {
+            displayQuestion(0);
+        }
+        
+        function displayQuestion(index) {
+            const container = document.getElementById('assessment-questions');
+            const question = assessmentQuestions[index];
+            
+            container.innerHTML = `
+                <div class="question-card">
+                    <div class="question-text">
+                        Question ${index + 1} of ${assessmentQuestions.length}: ${question.question}
+                    </div>
+                    <div class="options">
+                        ${question.options.map((option, i) => `
+                            <label class="option" onclick="selectOption(${index}, ${option.value})">
+                                <input type="radio" name="q${index}" value="${option.value}">
+                                ${option.text}
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            updateButtons();
+            updateProgressBar();
+        }
+        
+        function selectOption(questionIndex, value) {
+            answers[questionIndex] = value;
+            
+            // Visual feedback
+            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            
+            updateButtons();
+        }
+        
+        function nextQuestion() {
+            if (answers[currentQuestion] === undefined) {
+                alert('Please select an answer before continuing!');
+                return;
+            }
+            
+            currentQuestion++;
+            if (currentQuestion < assessmentQuestions.length) {
+                displayQuestion(currentQuestion);
+            }
+        }
+        
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion(currentQuestion);
+            }
+        }
+        
+        function updateButtons() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const submitBtn = document.getElementById('submit-btn');
+            
+            prevBtn.style.display = currentQuestion > 0 ? 'inline-block' : 'none';
+            
+            if (currentQuestion === assessmentQuestions.length - 1) {
+                nextBtn.style.display = 'none';
+                submitBtn.style.display = 'inline-block';
+            } else {
+                nextBtn.style.display = 'inline-block';
+                submitBtn.style.display = 'none';
+            }
+        }
+        
+        function updateProgressBar() {
+            const progress = ((currentQuestion + 1) / assessmentQuestions.length) * 100;
+            const progressBar = document.getElementById('assessment-progress');
+            progressBar.style.width = progress + '%';
+            progressBar.textContent = Math.round(progress) + '%';
+        }
+        
+        function submitAssessment() {
+            if (Object.keys(answers).length !== assessmentQuestions.length) {
+                alert('Please answer all questions!');
+                return;
+            }
+            
+            calculateResults();
+        }
+        
+        function calculateResults() {
+            // Calculate total score
+            const totalScore = Object.values(answers).reduce((sum, val) => sum + val, 0);
+            
+            // Calculate category scores
+            const categoryScores = {};
+            assessmentQuestions.forEach((q, index) => {
+                if (!categoryScores[q.category]) {
+                    categoryScores[q.category] = { total: 0, count: 0 };
+                }
+                categoryScores[q.category].total += answers[index];
+                categoryScores[q.category].count++;
+            });
+            
+            // Find matching character
+            const character = characterProfiles.find(char => 
+                totalScore >= char.scoreRange[0] && totalScore <= char.scoreRange[1]
+            );
+            
+            displayResults(character, categoryScores, totalScore);
+        }
+        
+        function displayResults(character, categoryScores, totalScore) {
+            document.querySelector('.assessment-container').style.display = 'none';
+            document.getElementById('results-section').style.display = 'block';
+            
+            // Character reveal
+            document.getElementById('character-name').textContent = `You are a ${character.name}!`;
+            document.getElementById('character-emoji').textContent = character.emoji;
+            document.getElementById('character-description').textContent = character.description;
+            
+            // Stats
+            const statsContainer = document.getElementById('stats-container');
+            const statCategories = {
+                organization: "Organization",
+                planning: "Planning",
+                time_awareness: "Time Awareness",
+                focus: "Focus",
+                memory: "Memory",
+                prioritization: "Prioritization",
+                decision_making: "Decision Making",
+                goal_setting: "Goal Setting"
+            };
+            
+            statsContainer.innerHTML = '';
+            Object.entries(categoryScores).forEach(([category, data]) => {
+                const percentage = (data.total / (data.count * 4)) * 100;
+                const statCard = document.createElement('div');
+                statCard.className = 'stat-card';
+                statCard.innerHTML = `
+                    <div class="stat-label">${statCategories[category] || category}</div>
+                    <div class="stat-bar">
+                        <div class="stat-fill" style="width: ${percentage}%">${Math.round(percentage)}%</div>
+                    </div>
+                `;
+                statsContainer.appendChild(statCard);
+            });
+            
+            // Strengths
+            const strengthsList = document.getElementById('strengths-list');
+            strengthsList.innerHTML = character.strengths.map(strength => 
+                `<div class="strategy-item"><div class="strategy-title">✨ ${strength}</div></div>`
+            ).join('');
+            
+            // Growth areas
+            const growthList = document.getElementById('growth-list');
+            growthList.innerHTML = character.growth.map(area => 
+                `<div class="strategy-item"><div class="strategy-title">🌱 ${area}</div></div>`
+            ).join('');
+            
+            // Recommendations
+            const recommendationsList = document.getElementById('recommendations-list');
+            recommendationsList.innerHTML = character.recommendations.map(rec => 
+                `<div class="strategy-item"><p>${rec}</p></div>`
+            ).join('');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        function retakeAssessment() {
+            currentQuestion = 0;
+            answers = {};
+            document.querySelector('.assessment-container').style.display = 'block';
+            document.getElementById('results-section').style.display = 'none';
+            initializeAssessment();
+        }
+        
+        // Goals
+        function saveGoal() {
+            const goal = document.getElementById('goal-input').value;
+            const measure = document.getElementById('measure-input').value;
+            const deadline = document.getElementById('deadline-input').value;
+            const steps = document.getElementById('steps-input').value;
+            
+            if (!goal || !deadline) {
+                alert('Please fill in at least the goal and deadline!');
+                return;
+            }
+            
+            const goalObj = {
+                id: Date.now(),
+                goal,
+                measure,
+                deadline,
+                steps,
+                completed: false
+            };
+            
+            let goals = JSON.parse(localStorage.getItem('goals') || '[]');
+            goals.push(goalObj);
+            localStorage.setItem('goals', JSON.stringify(goals));
+            
+            // Clear inputs
+            document.getElementById('goal-input').value = '';
+            document.getElementById('measure-input').value = '';
+            document.getElementById('deadline-input').value = '';
+            document.getElementById('steps-input').value = '';
+            
+            displayGoals();
+        }
+        
+        function displayGoals() {
+            const goals = JSON.parse(localStorage.getItem('goals') || '[]');
+            const goalsList = document.getElementById('goals-list');
+            
+            if (goals.length === 0) {
+                goalsList.innerHTML = '<p style="text-align: center; color: var(--text-gray);">No goals yet! Create your first goal above.</p>';
+                return;
+            }
+            
+            goalsList.innerHTML = goals.map(goal => `
+                <div class="strategy-item" style="${goal.completed ? 'opacity: 0.6;' : ''}">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div style="flex: 1;">
+                            <div class="strategy-title" style="${goal.completed ? 'text-decoration: line-through;' : ''}">
+                                ${goal.goal}
+                            </div>
+                            ${goal.measure ? `<p><strong>Success looks like:</strong> ${goal.measure}</p>` : ''}
+                            <p><strong>Deadline:</strong> ${new Date(goal.deadline).toLocaleDateString()}</p>
+                            ${goal.steps ? `<p><strong>Steps:</strong><br>${goal.steps.replace(/\n/g, '<br>')}</p>` : ''}
+                        </div>
+                        <div style="display: flex; gap: 0.5rem; flex-direction: column;">
+                            <button class="btn btn-secondary" style="padding: 0.5rem 1rem; margin: 0;" 
+                                    onclick="toggleGoalComplete(${goal.id})">
+                                ${goal.completed ? '↩️' : '✓'}
+                            </button>
+                            <button class="btn" style="padding: 0.5rem 1rem; margin: 0; background: var(--accent-coral);" 
+                                    onclick="deleteGoal(${goal.id})">
+                                🗑️
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function toggleGoalComplete(id) {
+            let goals = JSON.parse(localStorage.getItem('goals') || '[]');
+            goals = goals.map(goal => {
+                if (goal.id === id) {
+                    goal.completed = !goal.completed;
+                }
+                return goal;
+            });
+            localStorage.setItem('goals', JSON.stringify(goals));
+            displayGoals();
+        }
+        
+        function deleteGoal(id) {
+            if (!confirm('Are you sure you want to delete this goal?')) return;
+            
+            let goals = JSON.parse(localStorage.getItem('goals') || '[]');
+            goals = goals.filter(goal => goal.id !== id);
+            localStorage.setItem('goals', JSON.stringify(goals));
+            displayGoals();
+        }
+        
+        // Progress tracking
+        function updateProgress(category, percentage) {
+            const progressFill = document.getElementById(`${category}-progress`);
+            progressFill.style.width = percentage + '%';
+            
+            const labels = {
+                0: 'Not Yet Established',
+                33: 'Emerging',
+                66: 'Developing',
+                100: 'Mastery'
+            };
+            
+            progressFill.textContent = labels[percentage];
+            
+            // Save to localStorage
+            localStorage.setItem(`progress-${category}`, percentage);
+        }
+        
+        function loadProgress() {
+            ['materials', 'time', 'study', 'goals'].forEach(category => {
+                const saved = localStorage.getItem(`progress-${category}`);
+                if (saved) {
+                    const progressFill = document.getElementById(`${category}-progress`);
+                    progressFill.style.width = saved + '%';
+                    const labels = {
+                        0: 'Not Yet Established',
+                        33: 'Emerging',
+                        66: 'Developing',
+                        100: 'Mastery'
+                    };
+                    progressFill.textContent = labels[saved];
+                }
+            });
+        }
+        
+        // Reflections
+        function saveReflection() {
+            const text = document.getElementById('reflection-input').value;
+            if (!text.trim()) {
+                alert('Please write a reflection first!');
+                return;
+            }
+            
+            const reflection = {
+                id: Date.now(),
+                text,
+                date: new Date().toLocaleDateString()
+            };
+            
+            let reflections = JSON.parse(localStorage.getItem('reflections') || '[]');
+            reflections.unshift(reflection);
+            localStorage.setItem('reflections', JSON.stringify(reflections));
+            
+            document.getElementById('reflection-input').value = '';
+            displayReflections();
+        }
+        
+        function displayReflections() {
+            const reflections = JSON.parse(localStorage.getItem('reflections') || '[]');
+            const list = document.getElementById('reflections-list');
+            
+            if (reflections.length === 0) {
+                list.innerHTML = '';
+                return;
+            }
+            
+            list.innerHTML = '<h3 style="font-family: \'Caveat\', cursive; font-size: 2rem; margin-top: 2rem;">Past Reflections</h3>' +
+                reflections.slice(0, 5).map(ref => `
+                    <div class="strategy-item">
+                        <div class="strategy-title">${ref.date}</div>
+                        <p>${ref.text}</p>
+                    </div>
+                `).join('');
+        }
+        
+        // Chatbot
+        function toggleChatbot() {
+            const chatbot = document.getElementById('chatbot-window');
+            chatbot.classList.toggle('active');
+        }
+        
+        function handleChatEnter(event) {
+            if (event.key === 'Enter') {
+                sendChatMessage();
+            }
+        }
+        
+        function sendChatMessage() {
+            const input = document.getElementById('chatbot-input');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            addChatMessage(message, 'user');
+            input.value = '';
+            
+            // Generate bot response
+            setTimeout(() => {
+                const response = generateChatResponse(message);
+                addChatMessage(response, 'bot');
+            }, 500);
+        }
+        
+        function addChatMessage(text, sender) {
+            const messagesContainer = document.getElementById('chatbot-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            messageDiv.textContent = text;
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        function generateChatResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            // Simple keyword matching for responses
+            if (lowerMessage.includes('time') || lowerMessage.includes('procrastinate')) {
+                return "Time management is all about awareness! Try using visual timers, breaking tasks into smaller chunks (Pomodoro technique), and estimating how long things will take. Start with tracking your time for a week to see where it goes!";
+            } else if (lowerMessage.includes('note') || lowerMessage.includes('notes')) {
+                return "Great note-taking tip: Listen FIRST, then write. Use bullet points, abbreviations, and go back to fill in details. Try the three-column method: Main Ideas | Supporting Details | Personal Connections. Check out the Strategies section for more!";
+            } else if (lowerMessage.includes('test') || lowerMessage.includes('anxiety') || lowerMessage.includes('nervous')) {
+                return "Test anxiety is totally normal! Here's what helps: 1) Prepare well in advance, 2) Get good sleep the night before, 3) Read questions carefully, 4) Answer easy ones first, 5) Take deep breaths. Remember - it's just a test, and you've got this! 💪";
+            } else if (lowerMessage.includes('memory') || lowerMessage.includes('remember') || lowerMessage.includes('forget')) {
+                return "Memory tricks that work: Create stories (even silly ones!), use acronyms, connect info to emotions, make it personal, or add rhythm/rhyme. The key is making information meaningful to YOU. Try categorization too - group similar things together!";
+            } else if (lowerMessage.includes('organize') || lowerMessage.includes('messy') || lowerMessage.includes('clutter')) {
+                return "Organization starts simple: 1) Everything needs a home, 2) Use color-coding, 3) Clean out your backpack weekly, 4) Set up a system and stick with it for 3 weeks. Even just 5 minutes of organizing daily makes a huge difference!";
+            } else if (lowerMessage.includes('goal') || lowerMessage.includes('plan')) {
+                return "Make your goals SMART: Specific, Measurable, Achievable, Relevant, and Time-bound! Instead of 'do better in math,' try 'raise my algebra grade from C to B by end of semester by studying 30 min daily.' Break big goals into small steps!";
+            } else if (lowerMessage.includes('focus') || lowerMessage.includes('distract') || lowerMessage.includes('concentrate')) {
+                return "Focus tips: Remove distractions first (phone away!), work in 25-min focused blocks with 5-min breaks, have a dedicated study space, use white noise if helpful, and tackle hardest tasks when you're most alert. What specifically distracts you?";
+            } else if (lowerMessage.includes('help') || lowerMessage.includes('how')) {
+                return "I can help with study strategies, time management, organization, memory techniques, test-taking, goal-setting, and more! Just ask me specific questions like 'How do I stop procrastinating?' or 'What's the best way to study for a history test?'";
+            } else {
+                return "That's a great question! I'd recommend checking out the different sections of this hub - we have strategies for study skills, memory, time management, organization, and more. Or feel free to ask me something more specific! 😊";
+            }
+        }
+        
+        // Initialize on load
+        window.addEventListener('load', () => {
+            initializeAssessment();
+            displayGoals();
+            displayReflections();
+            loadProgress();
+        });
+    </script>
+</body>
+</html>
